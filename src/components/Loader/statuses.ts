@@ -10,7 +10,3 @@ export const LoadingStatuses = [
   LOADING_THIRD,
   ERROR_TIMEOUT,
 ];
-
-export const WIDGET_LOAD_TIME = 10;
-
-export const LOADER_MESSAGES_TIMEOUT = 2;

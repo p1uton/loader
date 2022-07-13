@@ -1,29 +1,18 @@
-import { useEffect, useState } from 'react';
-import { LOADER_MESSAGES_TIMEOUT, LoadingStatuses } from '../../consts/consts';
+import { useContext } from 'react';
+import { MessagesContext } from '../../messages/MessagesContext';
 import { Spinner } from '../Spinner';
-import { useTranslation } from 'react-i18next';
+import { LoadingStatuses } from './statuses';
+import { useStatuses } from './useStatuses';
 
 export const Loader: React.FC = () => {
-  const [status, setStatus] = useState(0);
+  const status = useStatuses();
 
-  const { t } = useTranslation('messages');
-
-  useEffect(() => {
-    if (status === LoadingStatuses.length - 1) {
-      return;
-    }
-
-    const timeout = setTimeout(() => {
-      setStatus((prev) => prev + 1);
-    }, LOADER_MESSAGES_TIMEOUT * 1000);
-
-    return () => clearTimeout(timeout);
-  }, [status]);
+  const { i18n } = useContext(MessagesContext);
 
   return (
     <>
       <Spinner />
-      <div>{t(LoadingStatuses[status])}</div>
+      <div>{i18n(LoadingStatuses[status])}</div>
     </>
   );
 };

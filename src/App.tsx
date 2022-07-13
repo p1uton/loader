@@ -1,8 +1,10 @@
 import React, { Suspense, FC } from 'react';
 import { LoadedMessage } from './components/LoadedMessage';
 import { Loader } from './components/Loader';
-import { WIDGET_LOAD_TIME } from './consts/consts';
+import { MessagesProvider } from './messages/MessagesProvider';
 import { delay } from './utils/utils';
+
+const WIDGET_LOAD_TIME = 10;
 
 const SomeConvenientWidget = React.lazy(() =>
   delay(WIDGET_LOAD_TIME * 1000).then(
@@ -12,11 +14,11 @@ const SomeConvenientWidget = React.lazy(() =>
 
 export const App: FC = () => {
   return (
-    <div>
+    <MessagesProvider>
       <Suspense fallback={<Loader />}>
         <LoadedMessage />
         <SomeConvenientWidget />
       </Suspense>
-    </div>
+    </MessagesProvider>
   );
 };

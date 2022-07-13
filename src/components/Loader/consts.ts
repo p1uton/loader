@@ -1,0 +1,1 @@
+export const LOADER_MESSAGES_TIMEOUT = 2;
